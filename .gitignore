@@ -1,4 +1,4 @@
 Pipfile
-*.py
+*.pyc
 .DS_Store
 .idea/
