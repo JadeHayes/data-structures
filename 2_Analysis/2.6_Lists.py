@@ -8,25 +8,25 @@
 from timeit import Timer
 
 
-def concat(n):
+def concat(n=1000):
     """ O(k) runtime, depends on the size of the list"""
     lst = []
     for i in range(n):
         lst += [i]
 
 
-def append(n):
+def append(n=1000):
     """O(1) runtime, adds to the end of the list"""
     lst = []
     for i in range(n):
         lst.append(i)
 
 
-def lst_comprehension(n):
+def lst_comprehension(n=1000):
     lst = [i for i in range(n)]
 
 
-def lst_range(n):
+def lst_range(n=1000):
     lst = list(range(n))
 
 
@@ -43,5 +43,5 @@ def time_method(function_name: str) -> None:
     t1 = Timer(f"{function_name}", f"from __main__ import {function_name}")
     print(f"{function_name}: {t1.timeit(number=1000)} milliseconds")
 
-time_all_methods()
 
+time_all_methods()
