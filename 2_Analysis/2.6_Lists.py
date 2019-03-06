@@ -8,39 +8,40 @@
 from timeit import Timer
 
 
-class ListOfInts:
+def concat(n):
+    """ O(k) runtime, depends on the size of the list"""
+    lst = []
+    for i in range(n):
+        lst += [i]
 
-    @staticmethod
-    def concat(n):
-        """ O(k) runtime, depends on the size of the list"""
-        lst = []
-        for i in range(n):
-            lst += [i]
 
-    @staticmethod
-    def append(n):
-        """O(1) runtime, adds to the end of the list"""
-        lst = []
-        for i in range(n):
-            lst.append(i)
+def append(n):
+    """O(1) runtime, adds to the end of the list"""
+    lst = []
+    for i in range(n):
+        lst.append(i)
 
-    @staticmethod
-    def lst_comprehension(n):
-        lst = [i for i in range(n)]
 
-    @staticmethod
-    def lst(n):
-        lst = list(range(n))
+def lst_comprehension(n):
+    lst = [i for i in range(n)]
+
+
+def lst_range(n):
+    lst = list(range(n))
 
 
 def time_all_methods() -> None:
     """ Prints out the time it takes in milliseconds for all methods to run"""
-    # method_names = All mthods in the class
-    for method_name in method_names:
-        time_all_methods(method_name)
+    list_of_n_solvers = ["concat", "append", "lst_comprehension", "lst_range"]
+
+    for function_name in list_of_n_solvers:
+        time_method(function_name)
 
 
-def time_method(method_name: str) -> None:
+def time_method(function_name: str) -> None:
     """ Prints out the time it takes in milliseconds for one methods to run"""
-    t1 = Timer(method_name, f"from__main__ import {method_name}")
-    print(f"{method_name}, {t1.timeit(number=1000)} milliseconds")
+    t1 = Timer(f"{function_name}", f"from __main__ import {function_name}")
+    print(f"{function_name}: {t1.timeit(number=1000)} milliseconds")
+
+time_all_methods()
+

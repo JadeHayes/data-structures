@@ -3,7 +3,9 @@ Write a boolean function that will take two strings and return whether they are 
 """
 str1 = "apple"
 str2 = "pplae"
-class Anagram:
+
+
+class AnagramSolver:
 
     def quadratic(str1, str2) -> bool:
         """
