@@ -1,7 +1,6 @@
 from pythonds.basic.stack import Stack
 
 
-
 def base_converter(decimal: int, base:int) -> str:
     digits = "0123456789ABCDEF"
     stack = Stack()

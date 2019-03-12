@@ -32,4 +32,4 @@ def infix_to_postfix(infix: str):
     return  " ".join(post_fix)
 
 
-print(infix_to_postfix("A * B + C * D"))
+print(infix_to_postfix("A * B * C * D + E + F"))
