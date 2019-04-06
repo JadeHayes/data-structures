@@ -13,36 +13,39 @@ def infix_to_postfix(infix: str):
     post_fix: list = []
     token: list =infix.split()
 
-    for t in token:
-        #  If the token we are on isn't an operator or (, add it to the postfix list
-        # list because the position of the letters and numbers do not change.
-        if t in "ABCDEFGHIJKLMNOPQRSTUVWXYZ" or t in "0123456789":
-            post_fix.append(t)
-        # If the token is a opening paren "(" it means there will be a closing
-        # paren we need to translate this to postfix, pop it on the stack.
-        elif t =="(":
-            opStack.push(t)
-        # if the token is a closing paren
-        elif t ==")":
-            top_token = opStack.pop()
-            while top_token != "(":
-                post_fix.append(top_token)
+    try:
+        for t in token:
+            #  If the token we are on isn't an operator or (, add it to the postfix list
+            # list because the position of the letters and numbers do not change.
+            if t in "ABCDEFGHIJKLMNOPQRSTUVWXYZ" or t in "0123456789":
+                post_fix.append(t)
+            # If the token is a opening paren "(" it means there will be a closing
+            # paren we need to translate this to postfix, pop it on the stack.
+            elif t =="(":
+                opStack.push(t)
+            # if the token is a closing paren
+            elif t ==")":
                 top_token = opStack.pop()
-        # If the token is an operator, check to see if the opstack is empty and if the
-        # tokens precedence is > or = the top token on the stack.
-        # if it's greater than, it will be calculated first, so put it in the list.
-        else:
-            while (not opStack.isEmpty()) and (prec[opStack.peek()] >= prec[t]):
-                post_fix.append(opStack.pop())
-            # if the stack is empty or the precedence is less than, put the token on the top of the stack.
-            #  this way the lower precedence operators will get added to the list first.
-            opStack.push(t)
-    # after we've gone through all of the tokens, check the stack to see what is left.
-    # pop it off in that order and add it to the list
-    while not opStack.isEmpty():
-        post_fix.append(opStack.pop())
-    # join the list and return
-    return  " ".join(post_fix)
+                while top_token != "(":
+                    post_fix.append(top_token)
+                    top_token = opStack.pop()
+            # If the token is an operator, check to see if the opstack is empty and if the
+            # tokens precedence is > or = the top token on the stack.
+            # if it's greater than, it will be calculated first, so put it in the list.
+            else:
+                while (not opStack.isEmpty()) and (prec[opStack.peek()] >= prec[t]):
+                    post_fix.append(opStack.pop())
+                # if the stack is empty or the precedence is less than, put the token on the top of the stack.
+                #  this way the lower precedence operators will get added to the list first.
+                opStack.push(t)
+        # after we've gone through all of the tokens, check the stack to see what is left.
+        # pop it off in that order and add it to the list
+        while not opStack.isEmpty():
+            post_fix.append(opStack.pop())
+        # join the list and return
+        return  " ".join(post_fix)
+    except:
+        print(f"Whoops, something went wrong. {infix} not valid.")
 
 
 def postfixEval(postfixExpr):
